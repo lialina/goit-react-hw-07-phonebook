@@ -8,11 +8,12 @@ import ContactList from './components/ContactList/ContactList';
 
 import { useDispatch, useSelector } from 'react-redux';
 // import { initialState } from './redux/reducer';
-import { addContact } from './redux/actions';
+import { addContact, postContactOperation } from './redux/actions';
+// import { postContactOperation } from './redux/operations';
 
 export default function App() {
   const dispatch = useDispatch();
-  const { contacts } = useSelector(state => state);
+  const { contacts } = useSelector(state => state.contacts);
 
   // const [contacts, setContacts] = useState(initialState.contacts);
   const [filter, setFilter] = useState('');
@@ -34,7 +35,7 @@ export default function App() {
   }, [contacts]);
 
   const handleSubmitWithAddContact = ({ contact }) => {
-    dispatch(addContact({ ...contact, id: shortid.generate() }));
+    dispatch(postContactOperation({ ...contact, id: shortid.generate() }));
 
     // const newContact = {
     //   id: shortid.generate(),

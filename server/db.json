@@ -1,3 +1,9 @@
 {
-  "contacts": []
+  "contacts": [
+    {
+      "name": "Harry Potter",
+      "number": "775-03-11",
+      "id": "XUrwZdoJH"
+    }
+  ]
 }
