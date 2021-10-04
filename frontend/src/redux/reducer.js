@@ -11,8 +11,6 @@ export const initialState = {
   error: "",
 };
 
-// !!! Или switch, или handlers
-
 export const contactsReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case types.ADD_CONTACT:
@@ -27,20 +25,3 @@ export const contactsReducer = (state = initialState, { type, payload }) => {
       return state;
   }
 };
-
-// const handlers = {
-//   [types.ADD_CONTACT]: (state, actions) => ({
-//     ...state,
-//     contacts: [...state.contacts, actions.payload],
-//   }),
-//   [types.DELETE_CONTACT]: (state, actions) => ({
-//     ...state,
-//     contacts: state.contacts.filter(contact => contact.id !== actions.payload),
-//   }),
-//   DEFAULT: state => state,
-// };
-
-// export const phoneBook = (state = initialState, actions) => {
-//   const handler = handlers[actions.type] || handlers.DEFAULT;
-//   return handler(state, actions);
-// };

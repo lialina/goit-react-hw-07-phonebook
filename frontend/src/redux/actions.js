@@ -29,36 +29,9 @@ export const postContactOperation = (contact) => async (dispatch) => {
   try {
     const result = await axios.post("http://localhost:7777/contacts", contact);
     dispatch(addContact(result.data));
-    // console.log("result", result.data);
   } catch (error) {
     dispatch(contactFetchError(error));
   } finally {
     dispatch(contactFetchFinished());
   }
 }
-
-// export function addContact(data) {
-//   return {
-//     type: types.ADD_CONTACT,
-//     payload: data,
-//   }
-// };
-
-// export function deleteContact(id) {
-//   return {
-//     type: types.DELETE_CONTACT,
-//     payload: id,
-//   }
-// };
-
-// export function postContactOperation(contact) {
-//   return async function () {
-//     const result = await axios.post("http://localhost:7777/contacts", contact);
-//     console.log("result", result);
-//   }
-// };
-
-// const thunk = (store) => (next) => (addContact) => {
-//   next(addContact());
-//   next(postContactOperation());
-// }
