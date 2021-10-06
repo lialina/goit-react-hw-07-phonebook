@@ -32,7 +32,7 @@ export const contactFetchError = (error) => ({
 export const getContactsOperation = () => async (dispatch) => {
   dispatch(contactFetchStart());
   try {
-    const result = await axios.get("http://localhost:7777/contacts");
+    const result = await axios.get("https://61546f8d2473940017efae5d.mockapi.io/contacts");
     dispatch(setContacts(result.data));
   } catch (error) {
     dispatch(contactFetchError(error));
@@ -44,7 +44,7 @@ export const getContactsOperation = () => async (dispatch) => {
 export const postContactOperation = (contact) => async (dispatch) => {
   dispatch(contactFetchStart());
   try {
-    const result = await axios.post("http://localhost:7777/contacts", contact);
+    const result = await axios.post("https://61546f8d2473940017efae5d.mockapi.io/contacts", contact);
     dispatch(addContact(result.data));
   } catch (error) {
     dispatch(contactFetchError(error));
@@ -55,7 +55,7 @@ export const postContactOperation = (contact) => async (dispatch) => {
 
 export const deleteContactOperation = (id) => async (dispatch) => {
   try {
-    const result = await axios.delete(`http://localhost:7777/contacts/${id}`);
+    const result = await axios.delete(`https://61546f8d2473940017efae5d.mockapi.io/contacts/${id}`);
     dispatch(deleteContact(id));
     console.log(result)
   } catch (error) {
