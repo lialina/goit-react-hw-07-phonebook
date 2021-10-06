@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import s from './ContactList.module.css';
 import { useDispatch } from 'react-redux';
-import { deleteContact } from '../../redux/actions';
+import { deleteContactOperation } from '../../redux/actions';
 
 export default function ContactList({ contactsData }) {
   const dispatch = useDispatch();
 
   const deleteContactClick = id => {
-    dispatch(deleteContact(id));
+    dispatch(deleteContactOperation(id));
   };
 
   return (

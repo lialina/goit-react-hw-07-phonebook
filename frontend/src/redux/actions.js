@@ -1,6 +1,11 @@
 import { types } from './types';
 import axios from "axios";
 
+export const setContacts = array => ({
+  type: types.SET_CONTACT,
+  payload: array,
+});
+
 export const addContact = data => ({
   type: types.ADD_CONTACT,
   payload: data,
@@ -24,6 +29,18 @@ export const contactFetchError = (error) => ({
   payload: error,
 });
 
+export const getContactsOperation = () => async (dispatch) => {
+  dispatch(contactFetchStart());
+  try {
+    const result = await axios.get("http://localhost:7777/contacts");
+    dispatch(setContacts(result.data));
+  } catch (error) {
+    dispatch(contactFetchError(error));
+  } finally {
+    dispatch(contactFetchFinished());
+  }
+};
+
 export const postContactOperation = (contact) => async (dispatch) => {
   dispatch(contactFetchStart());
   try {
@@ -33,5 +50,15 @@ export const postContactOperation = (contact) => async (dispatch) => {
     dispatch(contactFetchError(error));
   } finally {
     dispatch(contactFetchFinished());
+  }
+};
+
+export const deleteContactOperation = (id) => async (dispatch) => {
+  try {
+    const result = await axios.delete(`http://localhost:7777/contacts/${id}`);
+    dispatch(deleteContact(id));
+    console.log(result)
+  } catch (error) {
+    dispatch(contactFetchError(error));
   }
 }

@@ -7,18 +7,24 @@ import Filter from './components/Filter/Filter';
 import ContactList from './components/ContactList/ContactList';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { postContactOperation } from './redux/actions';
+import { postContactOperation, getContactsOperation } from './redux/actions';
 
 export default function App() {
   const dispatch = useDispatch();
-  const { contacts } = useSelector(state => state.contacts);
+  const { items, error, loader } = useSelector(state => state.contacts);
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
-    window.localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
+    dispatch(getContactsOperation());
+  }, [dispatch]);
 
   const handleSubmitWithAddContact = ({ contact }) => {
+    const presentContact = items.find((presentContact) => presentContact.name === contact.name);
+    if (presentContact) {
+      alert(`${contact.name} is already in contacts. We are working on the ability to edit contacts, but for now you can delete the existing one and add it with a new number.`);
+      return;
+    }
+
     dispatch(postContactOperation({ ...contact, id: shortid.generate() }));
   };
 
@@ -29,11 +35,11 @@ export default function App() {
   const getVisibleContacts = useMemo(() => {
     const normalizedFilter = filter.toLowerCase();
 
-    let visibleContacts = contacts.filter(contact =>
+    let visibleContacts = items.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter),
     );
     return visibleContacts;
-  }, [contacts, filter]);
+  }, [items, filter]);
 
   return (
     <Container>
@@ -43,7 +49,9 @@ export default function App() {
       <h2>Contacts</h2>
       <Filter value={filter} onChange={changeFilter} />
 
-      <ContactList contactsData={getVisibleContacts} />
+      {loader && <h2>Loading...</h2>}
+      {error && <h2>{error}</h2>}
+      {!loader && !error && <ContactList contactsData={getVisibleContacts} />}
     </Container>
   );
 }
