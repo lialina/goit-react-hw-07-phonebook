@@ -7,7 +7,9 @@ import Filter from './components/Filter/Filter';
 import ContactList from './components/ContactList/ContactList';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { postContactOperation, getContactsOperation } from './redux/actions';
+// import { postContactOperation, getContactsOperation } from './redux/actions';
+import { createContact, getContacts } from './redux/actions';
+
 
 export default function App() {
   const dispatch = useDispatch();
@@ -15,7 +17,7 @@ export default function App() {
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
-    dispatch(getContactsOperation());
+    dispatch(getContacts());
   }, [dispatch]);
 
   const handleSubmitWithAddContact = ({ contact }) => {
@@ -25,7 +27,7 @@ export default function App() {
       return;
     }
 
-    dispatch(postContactOperation({ ...contact, id: shortid.generate() }));
+    dispatch(createContact({ ...contact, id: shortid.generate() }));
   };
 
   const changeFilter = event => {
