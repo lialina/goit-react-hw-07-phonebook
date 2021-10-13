@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import shortid from 'shortid';
-import s from './ContactForm.module.css';
+import styles from './ContactForm.module.css';
 
 export default function ContactForm({ onSubmit }) {
   const [contact, setContact] = useState({
@@ -39,8 +39,8 @@ export default function ContactForm({ onSubmit }) {
   };
 
   return (
-    <form className={s.form} onSubmit={handleSubmit}>
-      <label className={s.label} htmlFor={nameInputId}>
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <label className={styles.label} htmlFor={nameInputId}>
         Name{' '}
         <input
           type="text"
@@ -53,7 +53,7 @@ export default function ContactForm({ onSubmit }) {
           required
         />
       </label>
-      <label className={s.label} htmlFor={numberInputId}>
+      <label className={styles.label} htmlFor={numberInputId}>
         Number{' '}
         <input
           type="tel"
@@ -67,7 +67,7 @@ export default function ContactForm({ onSubmit }) {
         />
       </label>
 
-      <button className={s.button} type="submit">
+      <button className={styles.button} type="submit">
         Add contact
       </button>
     </form>

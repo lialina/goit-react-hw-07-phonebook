@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import s from './ContactList.module.css';
+import styles from './ContactList.module.css';
 import { useDispatch } from 'react-redux';
 import { deleteContact } from '../../redux/actions';
 
@@ -11,12 +11,12 @@ export default function ContactList({ contactsData }) {
   };
 
   return (
-    <ul className={s.list}>
+    <ul className={styles.list}>
       {contactsData.map(({ id, name, number }) => (
-        <li className={s.item} key={id}>
-          <p className={s.name}>{name}</p>
-          <p className={s.number}>{number}</p>
-          <button className={s.button} onClick={() => deleteContactClick(id)}>
+        <li className={styles.item} key={id}>
+          <p className={styles.name}>{name}</p>
+          <p className={styles.number}>{number}</p>
+          <button className={styles.button} onClick={() => deleteContactClick(id)}>
             Delete
           </button>
         </li>

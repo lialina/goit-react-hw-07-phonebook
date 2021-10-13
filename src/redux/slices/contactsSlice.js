@@ -8,9 +8,6 @@ const contactSlice = createSlice({
     loader: false,
     error: "",
   },
-  // reducers: {
-  //   addContact: (state, action) => ({ ...state, items: [...state.items, action.payload] }),
-  // },
   extraReducers: {
     [createContact.pending]: (state) => {
       state.loader = true;
@@ -43,25 +40,6 @@ const contactSlice = createSlice({
     }
   }
 });
-
-// export const contactsReducer = (state = initialState, { type, payload }) => {
-//   switch (type) {
-//     case types.SET_CONTACT:
-//       return { ...state, items: payload };
-//     case types.ADD_CONTACT:
-//       return { ...state, items: [...state.items, payload] };
-//     case types.DELETE_CONTACT:
-//       return { ...state, items: state.items.filter(item => item.id !== payload)};   
-//     case types.CONTACT_FETCH_START:
-//       return { ...state, loader: true };
-//     case types.CONTACT_FETCH_FINISHED:
-//       return { ...state, loader: false };
-//     case types.CONTACT_FETCH_ERROR:
-//       return { ...state, error: payload };
-//     default:
-//       return state;
-//   }
-// };
 
 export const { addContact } = contactSlice.actions;
 export default contactSlice.reducer;

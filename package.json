@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://lialina.github.io/goit-react-hw-07-phonebook",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.6.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -18,6 +19,7 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
     "shortid": "^2.2.16",
+    "uuid": "^8.3.2",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
