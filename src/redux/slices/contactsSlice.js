@@ -34,12 +34,10 @@ const contactSlice = createSlice({
       state.error = "";
       state.items = [...state.items, ...payload];
     },
-
     [deleteContact.fulfilled]: (state, { payload }) => {
       state.items = [ ...state.items.filter(item => item.id !== payload)]; 
     }
   }
 });
 
-export const { addContact } = contactSlice.actions;
 export default contactSlice.reducer;
