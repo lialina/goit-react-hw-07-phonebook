@@ -23,7 +23,10 @@ export const getContacts = createAsyncThunk(
 export const deleteContact = createAsyncThunk(
   actionTitles.deleteContact,
   async (id) => {
-    await axios.delete(`${MOCKAPI_URL}/contacts/${id}`);
-    return id;
+    const result = await axios.delete(`${MOCKAPI_URL}/contacts/${id}`);
+    if (result.status === 200) {
+      const result = await axios.get(`${MOCKAPI_URL}/contacts`);
+      return result.data;
+    } 
   }
 )
