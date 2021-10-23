@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import shortid from 'shortid';
 import styles from './ContactForm.module.css';
+import { createShortId } from '../../serviсes/shortId';
 
 export default function ContactForm({ onSubmit }) {
   const [contact, setContact] = useState({
@@ -8,8 +8,8 @@ export default function ContactForm({ onSubmit }) {
     number: '',
   });
 
-  const nameInputId = shortid.generate();
-  const numberInputId = shortid.generate();
+  const nameInputId = createShortId();
+  const numberInputId = createShortId();
 
   const handleSubmit = event => {
     event.preventDefault();

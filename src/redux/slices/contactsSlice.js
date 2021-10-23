@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { createContact, getContacts, deleteContact } from '../actions';
+import { createContact, getContacts } from '../actions';
 
 const contactSlice = createSlice({
   name: 'contacts',
@@ -32,9 +32,6 @@ const contactSlice = createSlice({
     [getContacts.fulfilled]: (state, { payload }) => {
       state.loader = false;
       state.error = "";
-      state.items = [...state.items, ...payload];
-    },
-    [deleteContact.fulfilled]: (state, { payload }) => {
       state.items = [...payload];
     }
   }

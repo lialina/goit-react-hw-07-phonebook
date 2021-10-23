@@ -1,13 +1,22 @@
 import PropTypes from 'prop-types';
 import styles from './ContactList.module.css';
 import { useDispatch } from 'react-redux';
-import { deleteContact } from '../../redux/actions';
+import { deleteContact, getContacts} from '../../redux/actions';
+import { deleteContactService } from '../../serviсes/deleteContactService';
 
 export default function ContactList({ contactsData }) {
   const dispatch = useDispatch();
 
   const deleteContactClick = id => {
-    dispatch(deleteContact(id));
+    const execute = async () => {
+      const deleteAction = await dispatch(deleteContact(id));
+      const response = deleteAction.payload;
+      if (deleteContactService(response)) {
+        dispatch(getContacts());
+      }
+    }
+  
+    execute();
   };
 
   return (
@@ -16,7 +25,7 @@ export default function ContactList({ contactsData }) {
         <li className={styles.item} key={id}>
           <p className={styles.name}>{name}</p>
           <p className={styles.number}>{number}</p>
-          <button className={styles.button} onClick={() => deleteContactClick(id)}>
+          <button className={styles.button} onClick={(id) => deleteContactClick(id)}>
             Delete
           </button>
         </li>

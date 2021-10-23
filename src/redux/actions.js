@@ -2,12 +2,14 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { actionTitles } from './actionTitles';
 
-const MOCKAPI_URL = 'https://61546f8d2473940017efae5d.mockapi.io';
+const CONTACTS_URL = 'https://61546f8d2473940017efae5d.mockapi.io/contacts';
 
 export const createContact = createAsyncThunk(
   actionTitles.createContact,
   async (contact) => {
-    const result = await axios.post(`${MOCKAPI_URL}/contacts`, contact);
+    console.log(contact);
+    const result = await axios.post(`${CONTACTS_URL}`, contact);
+    console.log(contact);
     return result.data;
   }
 );
@@ -15,7 +17,7 @@ export const createContact = createAsyncThunk(
 export const getContacts = createAsyncThunk(
   actionTitles.getContacts,
   async () => {
-    const result = await axios.get(`${MOCKAPI_URL}/contacts`);
+    const result = await axios.get(`${CONTACTS_URL}`);
     return result.data;
   }
 );
@@ -23,10 +25,7 @@ export const getContacts = createAsyncThunk(
 export const deleteContact = createAsyncThunk(
   actionTitles.deleteContact,
   async (id) => {
-    const result = await axios.delete(`${MOCKAPI_URL}/contacts/${id}`);
-    if (result.status === 200) {
-      const result = await axios.get(`${MOCKAPI_URL}/contacts`);
-      return result.data;
-    } 
+    const result = await axios.delete(`${CONTACTS_URL}/${id}`);
+    return result.status;
   }
 )
