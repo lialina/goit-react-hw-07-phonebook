@@ -25,7 +25,7 @@ export default function ContactList({ contactsData }) {
         <li className={styles.item} key={id}>
           <p className={styles.name}>{name}</p>
           <p className={styles.number}>{number}</p>
-          <button className={styles.button} onClick={(id) => deleteContactClick(id)}>
+          <button className={styles.button} onClick={() => deleteContactClick(id)}>
             Delete
           </button>
         </li>

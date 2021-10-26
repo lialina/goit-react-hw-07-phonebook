@@ -7,7 +7,6 @@ import ContactList from './components/ContactList/ContactList';
 import { useDispatch, useSelector } from 'react-redux';
 import { createContact, getContacts } from './redux/actions';
 import * as phonebookSelectors from './redux/selectors';
-import { createShortId } from './serviсes/shortId';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -16,10 +15,6 @@ export default function App() {
   const items = useSelector(phonebookSelectors.items);
   const loader = useSelector(phonebookSelectors.loader);
   const error = useSelector(phonebookSelectors.error);
-
-  const contactId = createShortId();
-
-  console.log(items);
 
   useEffect(() => {
     dispatch(getContacts());
@@ -30,7 +25,7 @@ export default function App() {
     if (presentContact) {
       alert(`${contact.name} is already in contacts. We are working on the ability to edit contacts, but for now you can delete the existing one and add it with a new number.`);
     } else {
-      dispatch(createContact({ ...contact, id: contactId }));
+      dispatch(createContact({ ...contact }));
     }
   };
 
