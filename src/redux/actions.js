@@ -7,7 +7,7 @@ const CONTACTS_URL = 'https://61546f8d2473940017efae5d.mockapi.io/contacts';
 export const createContact = createAsyncThunk(
   actionTitles.createContact,
   async (contact) => {
-    const result = await axios.post(`${CONTACTS_URL}`, contact);
+    const result = await axios.post(CONTACTS_URL, contact);
     return result.data;
   }
 );
@@ -15,7 +15,7 @@ export const createContact = createAsyncThunk(
 export const getContacts = createAsyncThunk(
   actionTitles.getContacts,
   async () => {
-    const result = await axios.get(`${CONTACTS_URL}`);
+    const result = await axios.get(CONTACTS_URL);
     return result.data;
   }
 );
@@ -23,7 +23,7 @@ export const getContacts = createAsyncThunk(
 export const deleteContact = createAsyncThunk(
   actionTitles.deleteContact,
   async (id) => {
-    const result = await axios.delete(`${CONTACTS_URL}/${id}`);
+    const result = await axios.delete(CONTACTS_URL+`/${id}`);
     return result.status;
   }
 )

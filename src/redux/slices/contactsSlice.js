@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { createContact, getContacts } from '../actions';
+import { createContact, getContacts, deleteContact } from '../actions';
 
 const contactSlice = createSlice({
   name: 'contacts',
@@ -33,6 +33,9 @@ const contactSlice = createSlice({
       state.loader = false;
       state.error = "";
       state.items = [...payload];
+    },
+    [deleteContact.rejected]: (state) => {
+      state.error = "Error";
     }
   }
 });
