@@ -1,3 +1,3 @@
-export const apiStatuses = {
-  Success: 200,
+export const API_STATUSES = {
+  SUCCESS: 200,
 }

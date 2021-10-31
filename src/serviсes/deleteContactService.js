@@ -1,5 +1,5 @@
-import { apiStatuses } from "../consts/apiStatuses";
+import { API_STATUSES } from "../consts/apiStatuses";
 
 export function deleteContactService(response) {
-  return response === apiStatuses.Success;
+  return response === API_STATUSES.SUCCESS;
 }
