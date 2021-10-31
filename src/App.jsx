@@ -1,31 +1,32 @@
 import { useState, useEffect, useMemo } from 'react';
-import shortid from 'shortid';
 import './App.css';
 import Container from './components/Container/Container';
 import ContactForm from './components/ContactForm/ContactForm';
 import Filter from './components/Filter/Filter';
 import ContactList from './components/ContactList/ContactList';
-
 import { useDispatch, useSelector } from 'react-redux';
-import { postContactOperation, getContactsOperation } from './redux/actions';
+import { createContact, getContacts } from './redux/actions';
+import * as phonebookSelectors from './redux/selectors';
 
 export default function App() {
   const dispatch = useDispatch();
-  const { items, error, loader } = useSelector(state => state.contacts);
   const [filter, setFilter] = useState('');
 
+  const items = useSelector(phonebookSelectors.items);
+  const loader = useSelector(phonebookSelectors.loader);
+  const error = useSelector(phonebookSelectors.error);
+
   useEffect(() => {
-    dispatch(getContactsOperation());
-  }, [dispatch]);
+    dispatch(getContacts());
+  }, []);
 
   const handleSubmitWithAddContact = ({ contact }) => {
     const presentContact = items.find((presentContact) => presentContact.name === contact.name);
     if (presentContact) {
       alert(`${contact.name} is already in contacts. We are working on the ability to edit contacts, but for now you can delete the existing one and add it with a new number.`);
-      return;
+    } else {
+      dispatch(createContact({ ...contact }));
     }
-
-    dispatch(postContactOperation({ ...contact, id: shortid.generate() }));
   };
 
   const changeFilter = event => {
