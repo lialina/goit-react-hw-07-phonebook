@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import './App.css';
 import Container from './components/Container/Container';
 import ContactForm from './components/ContactForm/ContactForm';
@@ -16,14 +16,18 @@ export default function App() {
   const loader = useSelector(phonebookSelectors.loader);
   const error = useSelector(phonebookSelectors.error);
 
-  useEffect(() => {
+  React.useEffect(() => {
     dispatch(getContacts());
   }, []);
 
   const handleSubmitWithAddContact = ({ contact }) => {
-    const presentContact = items.find((presentContact) => presentContact.name === contact.name);
+    const presentContact = items.find(
+      presentContact => presentContact.name === contact.name,
+    );
     if (presentContact) {
-      alert(`${contact.name} is already in contacts. We are working on the ability to edit contacts, but for now you can delete the existing one and add it with a new number.`);
+      alert(
+        `${contact.name} is already in contacts. We are working on the ability to edit contacts, but for now you can delete the existing one and add it with a new number.`,
+      );
     } else {
       dispatch(createContact({ ...contact }));
     }
