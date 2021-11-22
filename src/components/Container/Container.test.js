@@ -14,8 +14,8 @@ describe('Filter component', () => {
       <Filter key="filter" />,
       <ContactList key="contact-list" />,
     ],
-    // children: [<h1>Phonebook</h1>, <h2>Contacts</h2>]
   };
+
   const component = shallow(<Container {...props}></Container>);
 
   it('should render with props', () => {
@@ -26,11 +26,12 @@ describe('Filter component', () => {
     expect(component.children()).toHaveLength(props.children.length);
   });
 
-  // it('should return null if no deploymentDetails', () => {
-  //   const props = {
-  //     children: []
-  //   }
-  //   const component = shallow(<Container {...props}></Container>);
-  //   expect(component).toBeUndefined()
-  // })
+  it('should be empty if no props in component', () => {
+    const props = {
+      children: [],
+    };
+
+    const component = shallow(<Container {...props}></Container>);
+    expect(component.children()).toHaveLength(0);
+  });
 });
