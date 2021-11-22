@@ -5,14 +5,17 @@ import Filter from '../Filter/Filter';
 describe('Filter component', () => {
   const props = {
     value: 'aaa',
-    onChange: () => {
-      console.log('Done');
-    },
+    onChange: () => jest.fn(),
   };
+
+  const onChangeMock = jest.fn();
 
   const component = shallow(<Filter {...props} />);
   const label = component.find('label');
   const input = label.find('input');
+
+  let value;
+  value = '';
 
   it('should render with props', () => {
     expect(component.exists()).toBeTruthy();
@@ -40,6 +43,14 @@ describe('Filter component', () => {
 
     it('inputs type is text', () => {
       expect(input.props()).toHaveProperty('type', 'text');
+    });
+
+    it('input change', () => {
+      const input = shallow(
+        <input type="text" value={value} onChange={onChangeMock} />,
+      );
+      input.simulate('change');
+      expect(onChangeMock).toHaveBeenCalled();
     });
   });
 });
