@@ -7,6 +7,7 @@ import ContactList from './components/ContactList/ContactList';
 import { useDispatch, useSelector } from 'react-redux';
 import { createContact, getContacts } from './redux/actions';
 import * as phonebookSelectors from './redux/selectors';
+import styles from './App.module.css';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ export default function App() {
   const loader = useSelector(phonebookSelectors.loader);
   const error = useSelector(phonebookSelectors.error);
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(getContacts());
   }, []);
 
@@ -54,8 +55,8 @@ export default function App() {
       <h2>Contacts</h2>
       <Filter value={filter} onChange={changeFilter} />
 
-      {loader && <h2>Loading...</h2>}
-      {error && <h2>{error}</h2>}
+      {loader && <h2 className={styles.loader}>Loading...</h2>}
+      {error && <h2 className={styles.error}>{error}</h2>}
       {!loader && !error && <ContactList contactsData={getVisibleContacts} />}
     </Container>
   );

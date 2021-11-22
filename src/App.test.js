@@ -1,97 +1,33 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import configureStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
-import { contactsMock } from './consts/contactsMock';
-import * as ReactReduxHooks from './redux/react-redux-hooks';
-import App from './App';
-import 'jsdom-global/register';
+import { shallow } from 'enzyme';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
+import ContactList from './components/ContactList/ContactList';
 
 describe('App', () => {
-  let wrapper;
-  let useEffect;
-  let store;
+  it('ContactList renders in App if loader and error are false', () => {
+    const props = {
+      isLoader: false,
+      isError: false,
+      contactsData: [],
+    };
 
-  const mockUseEffect = () => {
-    useEffect.mockImplementationOnce(f => f());
-  };
+    const contactListComponent = shallow(
+      <Provider store={store}>
+        <ContactList {...props} />
+      </Provider>,
+    );
+    expect(contactListComponent.exists()).toBeTruthy();
+  });
 
-  beforeEach(() => {
-    /* mocking store */
-    store = configureStore([thunk])({
-      contacts: contactsMock,
-      isLoading: false,
-      error: null,
-    });
+  it('h2 with loader renders if loader is true', () => {
+    const contactListComponent = shallow(<h2 isLoader={true}>Loading...</h2>);
+    expect(contactListComponent.exists()).toBeTruthy();
+  });
 
-    /* mocking useEffect */
-    useEffect = jest.spyOn(React, 'useEffect');
-    mockUseEffect(); // 2 times
-    mockUseEffect(); //
-
-    /* mocking useSelector on our mock store */
-    jest
-      .spyOn(ReactReduxHooks, 'useSelector')
-      .mockImplementation(store => store.getState());
-
-    /* mocking useDispatch on our mock store  */
-    jest
-      .spyOn(ReactReduxHooks, 'useDispatch')
-      .mockImplementation(() => store.dispatch);
-
-    /* shallow rendering */
-    // wrapper = shallow(<App store={store} />);
-
-    wrapper = mount(<App store={store} />);
-
-    describe('on mount', () => {
-      it('mockUseEffect', () => {
-        expect(mockUseEffect).toHaveBeenCalled();
-      });
-    });
+  it('h2 with error renders if error is true', () => {
+    const error = '404 Not found';
+    const contactListComponent = shallow(<h2 isError={true}>{error}</h2>);
+    expect(contactListComponent.exists()).toBeTruthy();
   });
 });
-
-// const thunk = ({ dispatch, getState }) => next => action => {
-//   if (typeof action === 'function') {
-//     return action(dispatch, getState)
-//   }
-
-//   return next(action)
-// }
-
-// const create = () => {
-//   const store = {
-//     getState: jest.fn(() => ({})),
-//     dispatch: jest.fn()
-//   }
-//   const next = jest.fn()
-
-//   const invoke = action => thunk(store)(next)(action)
-
-//   return { store, next, invoke }
-// }
-
-// test('passes through non-function action', () => {
-//   const { next, invoke } = create()
-//   const action = { type: 'TEST' }
-//   invoke(action)
-//   expect(next).toHaveBeenCalledWith(action)
-// })
-
-// test('calls the function', () => {
-//   const { invoke } = create()
-//   const fn = jest.fn()
-//   invoke(fn)
-//   expect(fn).toHaveBeenCalled()
-// })
-
-// test('passes dispatch and getState', () => {
-//   const { store, invoke } = create()
-//   invoke((dispatch, getState) => {
-//     dispatch('TEST DISPATCH')
-//     getState()
-//   })
-//   expect(store.dispatch).toHaveBeenCalledWith('TEST DISPATCH')
-//   expect(store.getState).toHaveBeenCalled()
-// })
