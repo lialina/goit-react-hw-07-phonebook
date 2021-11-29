@@ -4,65 +4,37 @@ import * as redux from 'react-redux';
 import App from './App';
 import { contactsMock } from './mocks/contactsMock';
 
-jest.mock('react-redux', () => ({
-  useSelector: jest.fn(),
-  useDispatch: jest.fn(),
-}));
-
 describe('App', () => {
-  const useSelectorMock = redux.useSelector;
-  const useDispatchMock = redux.useDispatch;
+  const useSelectorMock = jest.spyOn(redux, 'useSelector');
+  const useDispatchMock = jest.spyOn(redux, 'useDispatch');
 
-  beforeEach(() => {
-    useDispatchMock.mockImplementation(() => () => {});
-  });
+  const mockStore = {
+    contacts: {
+      items: contactsMock,
+      loader: false,
+      error: '',
+    },
+  };
 
-  afterEach(() => {
-    useDispatchMock.mockClear();
-    useSelectorMock.mockClear();
-  });
+  useDispatchMock.mockReturnValue(jest.fn());
+  useSelectorMock.mockImplementation(selector => selector(mockStore));
+  const appComponent = shallow(<App />);
 
   it('ContactList renders in App if loader is false and error is empty', () => {
-    const mockStore = {
-      contacts: {
-        items: contactsMock,
-        loader: false,
-        error: '',
-      },
-    };
-
-    useSelectorMock.mockImplementation(selector => selector(mockStore));
-    const appComponent = shallow(<App />);
     expect(appComponent.find('ContactList').exists()).toBeTruthy();
   });
 
   it('h2 with loader renders if loader is true', () => {
-    const mockStoreWithLoader = {
-      contacts: {
-        items: [],
-        loader: true,
-        error: '',
-      },
-    };
-
     useSelectorMock.mockImplementation(selector =>
-      selector(mockStoreWithLoader),
+      selector({ contacts: { ...mockStore.contacts, loader: true } }),
     );
     const appComponent = shallow(<App />);
     expect(appComponent.find('.loader').exists()).toBeTruthy();
   });
 
   it('h2 with error renders if error is true', () => {
-    const mockStoreWithError = {
-      contacts: {
-        items: [],
-        loader: false,
-        error: '404 Not found',
-      },
-    };
-
     useSelectorMock.mockImplementation(selector =>
-      selector(mockStoreWithError),
+      selector({ contacts: { ...mockStore.contacts, error: '404 Not found' } }),
     );
     const appComponent = shallow(<App />);
     expect(appComponent.find('.error').exists()).toBeTruthy();
