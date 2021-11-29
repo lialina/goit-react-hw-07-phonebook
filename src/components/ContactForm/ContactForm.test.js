@@ -3,18 +3,15 @@ import { shallow } from 'enzyme';
 import ContactForm from './ContactForm';
 
 describe('ContactForm component', () => {
-  const props = {
-    onSubmit: () => jest.fn(),
-  };
-
   const handleSubmitMock = jest.fn();
+  const props = { onSubmit: handleSubmitMock };
 
-  const component = shallow(<ContactForm {...props} />);
-  const label = component.find('label');
+  const contactFormComponent = shallow(<ContactForm {...props} />);
+  const label = contactFormComponent.find('label');
   const input = label.find('input');
 
   it('should render with props', () => {
-    expect(component.exists()).toBeTruthy();
+    expect(contactFormComponent.exists()).toBeTruthy();
   });
 
   it('contains label tag', () => {
@@ -26,18 +23,14 @@ describe('ContactForm component', () => {
   });
 
   it('form submit', () => {
-    const form = shallow(<form onSubmit={handleSubmitMock} />);
-    form.simulate('submit');
-    expect(handleSubmitMock).toHaveBeenCalled();
+    const contactFormElement = contactFormComponent.find('form');
+    contactFormElement.simulate('submit', { preventDefault: () => {} });
+    expect(handleSubmitMock).toHaveBeenCalledTimes(1);
   });
 
   it('click on button with type submit in form', () => {
-    const form = shallow(
-      <form onSubmit={handleSubmitMock}>
-        <button type="submit"></button>
-      </form>,
-    );
-    form.find('button').simulate('click');
-    expect(handleSubmitMock).toHaveBeenCalled();
+    const formButtonElement = contactFormComponent.find('button');
+    formButtonElement.simulate('click');
+    expect(handleSubmitMock).toHaveBeenCalledTimes(1);
   });
 });
