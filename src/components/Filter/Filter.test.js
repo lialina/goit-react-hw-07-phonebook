@@ -3,19 +3,16 @@ import { shallow } from 'enzyme';
 import Filter from '../Filter/Filter';
 
 describe('Filter component', () => {
+  const onChangeMock = jest.fn();
+
   const props = {
     value: 'aaa',
-    onChange: () => jest.fn(),
+    onChange: onChangeMock,
   };
-
-  const onChangeMock = jest.fn();
 
   const component = shallow(<Filter {...props} />);
   const label = component.find('label');
   const input = label.find('input');
-
-  let value;
-  value = '';
 
   it('should render with props', () => {
     expect(component.exists()).toBeTruthy();
@@ -46,11 +43,8 @@ describe('Filter component', () => {
     });
 
     it('input change', () => {
-      const input = shallow(
-        <input type="text" value={value} onChange={onChangeMock} />,
-      );
       input.simulate('change');
-      expect(onChangeMock).toHaveBeenCalled();
+      expect(onChangeMock).toHaveBeenCalledTimes(1);
     });
   });
 });
