@@ -6,16 +6,16 @@ describe('Filter component', () => {
   const onChangeMock = jest.fn();
 
   const props = {
-    value: 'aaa',
+    value: 'Aria',
     onChange: onChangeMock,
   };
 
-  const component = shallow(<Filter {...props} />);
-  const label = component.find('label');
+  const filter = shallow(<Filter {...props} />);
+  const label = filter.find('label');
   const input = label.find('input');
 
   it('should render with props', () => {
-    expect(component.exists()).toBeTruthy();
+    expect(filter.exists()).toBeTruthy();
   });
 
   it('contains label tag', () => {
