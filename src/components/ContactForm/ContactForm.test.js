@@ -23,14 +23,15 @@ describe('ContactForm component', () => {
   });
 
   it('form submit', () => {
-    const contactFormElement = contactFormComponent.find('form');
-    contactFormElement.simulate('submit', { preventDefault: () => {} });
+    const contactForm = contactFormComponent.find('form');
+    const event = { preventDefault: () => {} };
+    contactForm.simulate('submit', event);
     expect(handleSubmitMock).toHaveBeenCalledTimes(1);
   });
 
   it('click on button with type submit in form', () => {
-    const formButtonElement = contactFormComponent.find('button');
-    formButtonElement.simulate('click');
+    const contactFormButton = contactFormComponent.find('button');
+    contactFormButton.simulate('click');
     expect(handleSubmitMock).toHaveBeenCalledTimes(1);
   });
 });
