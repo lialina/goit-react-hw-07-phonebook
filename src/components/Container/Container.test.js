@@ -5,7 +5,7 @@ import ContactForm from '../ContactForm/ContactForm';
 import Filter from '../Filter/Filter';
 import ContactList from '../ContactList/ContactList';
 
-describe('Filter component', () => {
+describe('Container component', () => {
   const props = {
     children: [
       <h1 key="title-1">Phonebook</h1>,
@@ -24,6 +24,14 @@ describe('Filter component', () => {
 
   it('should render with children props', () => {
     expect(component.children()).toHaveLength(props.children.length);
+  });
+
+  it('should render exact prop', () => {
+    expect(component.find('h1').exists()).toBeTruthy();
+    expect(component.find('ContactList').exists()).toBeTruthy();
+    expect(component.find('h2').exists()).toBeTruthy();
+    expect(component.find('Filter').exists()).toBeTruthy();
+    expect(component.find('ContactList').exists()).toBeTruthy();
   });
 
   it('should be empty if no props in component', () => {
