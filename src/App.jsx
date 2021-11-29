@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import './App.css';
 import Container from './components/Container/Container';
 import ContactForm from './components/ContactForm/ContactForm';
 import Filter from './components/Filter/Filter';
@@ -55,8 +54,16 @@ export default function App() {
       <h2>Contacts</h2>
       <Filter value={filter} onChange={changeFilter} />
 
-      {loader && <h2 className={styles.loader}>Loading...</h2>}
-      {error && <h2 className={styles.error}>{error}</h2>}
+      {loader && (
+        <h2 key="loader" className={styles.loader}>
+          Loading...
+        </h2>
+      )}
+      {error && (
+        <h2 key="error" className={styles.error}>
+          {error}
+        </h2>
+      )}
       {!loader && !error && <ContactList contactsData={getVisibleContacts} />}
     </Container>
   );
