@@ -1,53 +1,51 @@
 import React from 'react';
+import * as redux from 'react-redux';
 import { shallow } from 'enzyme';
-import { Provider } from 'react-redux';
-import { store } from '../../redux/store';
 import ContactList from './ContactList';
+import { contactsMock } from '../../mocks/contactsMock';
 
 describe('ContactList component', () => {
-  const props = {
-    contactsData: [
-      {
-        id: '1',
-        name: 'Gendalf',
-        number: '355-78-19',
-      },
-    ],
+  const useSelectorMock = jest.spyOn(redux, 'useSelector');
+  const useDispatchMock = jest.spyOn(redux, 'useDispatch');
+
+  const dispatchMock = jest.fn();
+  const deleteContactClickMock = jest.fn();
+  const props = { contactsData: contactsMock };
+  const propsWithOnClick = {
+    contactsData: contactsMock,
+    onClick: () => deleteContactClickMock(props.contactsData.id),
   };
 
-  const deleteContactClickMock = jest.fn();
-
-  const component = shallow(
-    <Provider store={store}>
-      <ContactList {...props} />
-    </Provider>,
-  );
-
   it('should render with props', () => {
+    useSelectorMock.mockReturnValue({ error: '' });
+    useDispatchMock.mockReturnValue(dispatchMock);
+
+    const component = shallow(<ContactList {...props} />);
     expect(component.exists()).toBeTruthy();
   });
 
   it('should be empty without props', () => {
-    const props = [];
-    const component = shallow(
-      <Provider store={store}>
-        <ContactList {...props} />
-      </Provider>,
-    );
+    const props = { contactsData: [] };
+    const component = shallow(<ContactList {...props} />);
     const ul = component.find('ul');
     const li = ul.find('li');
     expect(li).toHaveLength(0);
   });
 
+  it('delete contact button renders in each contact', () => {
+    const contactListComponent = shallow(<ContactList {...propsWithOnClick} />);
+    const liButtonElement = contactListComponent.find('button');
+    expect(liButtonElement).toHaveLength(3);
+  });
+
+  // Question - Received number of calls: 0 - async deleteContactClick testing
   it('click on delete contact button', () => {
-    const li = shallow(
-      <li>
-        <button
-          onClick={() => deleteContactClickMock(props.contactsData.id)}
-        ></button>
-      </li>,
-    );
-    li.find('button').simulate('click');
-    expect(deleteContactClickMock).toHaveBeenCalled();
+    useSelectorMock.mockReturnValue({ error: '' });
+    useDispatchMock.mockReturnValue(dispatchMock);
+
+    const contactListComponent = shallow(<ContactList {...propsWithOnClick} />);
+    const liButtonElement = contactListComponent.find('button').at(1);
+    liButtonElement.simulate('click');
+    expect(deleteContactClickMock).toHaveBeenCalledTimes(1);
   });
 });
