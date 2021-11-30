@@ -1,12 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Filter from '../Filter/Filter';
+import { contactsMock } from '../../mocks/contactsMock';
 
 describe('Filter component', () => {
   const onChangeMock = jest.fn();
 
   const props = {
-    value: 'Aria',
+    value: contactsMock[0].name,
     onChange: onChangeMock,
   };
 
