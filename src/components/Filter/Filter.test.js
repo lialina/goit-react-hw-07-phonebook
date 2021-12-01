@@ -5,9 +5,11 @@ import { contactsMock } from '../../mocks/contactsMock';
 
 describe('Filter component', () => {
   const onChangeMock = jest.fn();
+  let [contact] = contactsMock;
+  let { name } = contact;
 
   const props = {
-    value: contactsMock[0].name,
+    value: name,
     onChange: onChangeMock,
   };
 
