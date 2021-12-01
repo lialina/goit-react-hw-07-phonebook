@@ -5,8 +5,8 @@ import { contactsMock } from '../../mocks/contactsMock';
 
 describe('Filter component', () => {
   const onChangeMock = jest.fn();
-  let [contact] = contactsMock;
-  let { name } = contact;
+  const [contact] = contactsMock;
+  const { name } = contact;
 
   const props = {
     value: name,
