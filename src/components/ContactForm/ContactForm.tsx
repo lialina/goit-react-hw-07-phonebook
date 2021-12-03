@@ -2,8 +2,9 @@ import React from 'react';
 import { useState } from 'react';
 import styles from './ContactForm.module.css';
 import { createShortId } from '../../serviсes/shortId';
+import ContactFormProps from '../../interfaces/ContactForm.interface';
 
-export default function ContactForm({ onSubmit }) {
+export default function ContactForm({ onSubmit }: ContactFormProps) {
   const [contact, setContact] = useState({
     name: '',
     number: '',
@@ -12,17 +13,15 @@ export default function ContactForm({ onSubmit }) {
   const nameInputId = createShortId();
   const numberInputId = createShortId();
 
-  const handleSubmit = event => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    onSubmit({
-      contact,
-    });
+    onSubmit(contact,);
 
     reset();
   };
 
-  const handleChange = event => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target;
     if (name === 'name' || name === 'number') {
       setContact({

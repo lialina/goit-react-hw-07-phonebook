@@ -1,8 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './Filter.module.css';
+import FilterProps from '../../interfaces/Filter.interface';
 
-export default function Filter({ value, onChange }) {
+export default function Filter({ value, onChange }: FilterProps) {
   return (
     <label className={styles.label}>
       Find contacts by name
@@ -10,8 +10,3 @@ export default function Filter({ value, onChange }) {
     </label>
   );
 }
-
-Filter.propTypes = {
-  value: PropTypes.string,
-  onChange: PropTypes.func,
-};

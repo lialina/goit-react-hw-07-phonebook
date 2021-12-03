@@ -3,14 +3,16 @@ import Container from './components/Container/Container';
 import ContactForm from './components/ContactForm/ContactForm';
 import Filter from './components/Filter/Filter';
 import ContactList from './components/ContactList/ContactList';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { createContact, getContacts } from './redux/actions';
 import * as phonebookSelectors from './redux/selectors';
 import styles from './App.module.css';
+import type { ContactData } from './types/ContactData.type';
+import {useAppDispatch} from './redux/store'
 
 export default function App() {
-  const dispatch = useDispatch();
-  const [filter, setFilter] = useState('');
+  const dispatch = useAppDispatch();
+  const [filter, setFilter] = useState<string>('');
 
   const items = useSelector(phonebookSelectors.items);
   const loader = useSelector(phonebookSelectors.loader);
@@ -20,9 +22,9 @@ export default function App() {
     dispatch(getContacts());
   }, []);
 
-  const handleSubmitWithAddContact = ({ contact }) => {
+  const handleSubmitWithAddContact = (contact: ContactData) => {
     const presentContact = items.find(
-      presentContact => presentContact.name === contact.name,
+      (presentContact: ContactData) => presentContact.name === contact.name,
     );
     if (presentContact) {
       alert(
@@ -33,14 +35,14 @@ export default function App() {
     }
   };
 
-  const changeFilter = event => {
+  const changeFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFilter(event.currentTarget.value);
   };
 
   const getVisibleContacts = useMemo(() => {
     const normalizedFilter = filter.toLowerCase();
 
-    let visibleContacts = items.filter(contact =>
+    let visibleContacts = items.filter((contact: ContactData) =>
       contact.name.toLowerCase().includes(normalizedFilter),
     );
     return visibleContacts;
