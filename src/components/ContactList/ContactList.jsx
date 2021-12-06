@@ -21,13 +21,13 @@ export default function ContactList({ contactsData }) {
   return (
     <>
       {error && <h2>{error}</h2>}
-      <ul className={styles.list}>
+      <ul className={styles?.list}>
         {contactsData.map(({ id, name, number }) => (
-          <li className={styles.item} key={id}>
-            <p className={styles.name}>{name}</p>
-            <p className={styles.number}>{number}</p>
+          <li className={styles?.item} key={id}>
+            <p className={styles?.name}>{name}</p>
+            <p className={styles?.number}>{number}</p>
             <button
-              className={styles.button}
+              className={styles?.button}
               onClick={() => deleteContactClick(id)}
             >
               Delete
