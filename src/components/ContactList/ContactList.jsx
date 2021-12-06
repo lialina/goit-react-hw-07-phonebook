@@ -9,6 +9,7 @@ import * as phonebookSelectors from '../../redux/selectors';
 export default function ContactList({ contactsData }) {
   const dispatch = useDispatch();
   const error = useSelector(phonebookSelectors.error);
+  const buttonName = 'Delete';
 
   const deleteContactClick = async id => {
     const deleteAction = await dispatch(deleteContact(id));
@@ -30,7 +31,7 @@ export default function ContactList({ contactsData }) {
               className={styles.button}
               onClick={() => deleteContactClick(id)}
             >
-              Delete
+              {buttonName}
             </button>
           </li>
         ))}
