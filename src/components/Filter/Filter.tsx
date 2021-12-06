@@ -1,6 +1,10 @@
 import React from 'react';
 import styles from './Filter.module.css';
-import FilterProps from '../../interfaces/Filter.interface';
+
+interface FilterProps {
+  value: string,
+  onChange: React.ChangeEventHandler<HTMLInputElement>
+}
 
 export default function Filter({ value, onChange }: FilterProps) {
   return (

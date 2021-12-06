@@ -3,15 +3,15 @@ import Container from './components/Container/Container';
 import ContactForm from './components/ContactForm/ContactForm';
 import Filter from './components/Filter/Filter';
 import ContactList from './components/ContactList/ContactList';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createContact, getContacts } from './redux/actions';
 import * as phonebookSelectors from './redux/selectors';
 import styles from './App.module.css';
-import type { ContactData } from './types/ContactData.type';
-import {useAppDispatch} from './redux/store'
+import type { ContactData } from './types/ContactData';
+import type { AppDispatch } from './redux/store'
 
 export default function App() {
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const [filter, setFilter] = useState<string>('');
 
   const items = useSelector(phonebookSelectors.items);

@@ -2,7 +2,10 @@ import React from 'react';
 import { useState } from 'react';
 import styles from './ContactForm.module.css';
 import { createShortId } from '../../serviсes/shortId';
-import ContactFormProps from '../../interfaces/ContactForm.interface';
+
+interface ContactFormProps {
+  onSubmit: Function
+}
 
 export default function ContactForm({ onSubmit }: ContactFormProps) {
   const [contact, setContact] = useState({

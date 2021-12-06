@@ -1,14 +1,18 @@
 import React from 'react';
 import styles from './ContactList.module.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact, getContacts } from '../../redux/actions';
 import { deleteContactService } from '../../serviсes/deleteContactService';
 import * as phonebookSelectors from '../../redux/selectors';
-import { useAppDispatch } from '../../redux/store'
-import ContactListProps from '../../interfaces/ContactList.interface';
+import type { AppDispatch } from '../../redux/store'
+import type { ContactData } from '../../types/ContactData';
+
+interface ContactListProps {
+  contactsData: ContactData[]
+}
 
 export default function ContactList({ contactsData }: ContactListProps) {
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const error = useSelector(phonebookSelectors.error);
 
   const deleteContactClick = async (id: string) => {
