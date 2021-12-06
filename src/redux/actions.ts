@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { actionTitles } from './actionTitles';
-import type {ContactData} from '../types/ContactData.type'
+import type {ContactData} from '../types/ContactData'
 
 const CONTACTS_URL: string = 'https://61546f8d2473940017efae5d.mockapi.io/contacts';
 
