@@ -19,7 +19,7 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    onSubmit(contact,);
+    onSubmit(contact);
 
     reset();
   };
