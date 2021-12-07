@@ -7,8 +7,13 @@ interface ContactFormProps {
   onSubmit: Function
 }
 
+interface ContactState {
+  name: string,
+  number: string,
+}
+
 export default function ContactForm({ onSubmit }: ContactFormProps) {
-  const [contact, setContact] = useState({
+  const [contact, setContact] = useState<ContactState>({
     name: '',
     number: '',
   });
