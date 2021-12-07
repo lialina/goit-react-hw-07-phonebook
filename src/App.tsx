@@ -8,7 +8,7 @@ import { createContact, getContacts } from './redux/actions';
 import * as phonebookSelectors from './redux/selectors';
 import styles from './App.module.css';
 import type { ContactData } from './types/ContactData';
-import type { AppDispatch } from './redux/store'
+import type { AppDispatch } from './redux/types'
 
 export default function App() {
   const dispatch = useDispatch<AppDispatch>();

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact, getContacts } from '../../redux/actions';
 import { deleteContactService } from '../../serviсes/deleteContactService';
 import * as phonebookSelectors from '../../redux/selectors';
-import type { AppDispatch } from '../../redux/store'
+import type { AppDispatch } from '../../redux/types'
 import type { ContactData } from '../../types/ContactData';
 
 interface ContactListProps {
