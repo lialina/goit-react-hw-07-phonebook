@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact, getContacts } from '../../redux/actions';
 import { deleteContactService } from '../../serviсes/deleteContactService';
 import * as phonebookSelectors from '../../redux/selectors';
-import type { AppDispatch } from '../../redux/types'
+import type { AppDispatch, RootState } from '../../redux/types'
 import type { ContactData } from '../../types/ContactData';
 
 interface ContactListProps {
@@ -13,7 +13,7 @@ interface ContactListProps {
 
 export default function ContactList({ contactsData }: ContactListProps) {
   const dispatch = useDispatch<AppDispatch>();
-  const error = useSelector(phonebookSelectors.error);
+  const error = useSelector<RootState, string>(phonebookSelectors.error);
 
   const deleteContactClick = async (id: string) => {
     const deleteAction = await dispatch(deleteContact(id));
