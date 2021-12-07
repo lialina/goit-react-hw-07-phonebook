@@ -9,14 +9,15 @@ import * as phonebookSelectors from './redux/selectors';
 import styles from './App.module.css';
 import type { ContactData } from './types/ContactData';
 import type { AppDispatch } from './redux/types'
+import type { RootState } from './redux/types'
 
 export default function App() {
   const dispatch = useDispatch<AppDispatch>();
   const [filter, setFilter] = useState<string>('');
 
-  const items = useSelector(phonebookSelectors.items);
-  const loader = useSelector(phonebookSelectors.loader);
-  const error = useSelector(phonebookSelectors.error);
+  const items = useSelector<RootState, ContactData[]>(phonebookSelectors.items);
+  const loader = useSelector<RootState, boolean>(phonebookSelectors.loader);
+  const error = useSelector<RootState, string>(phonebookSelectors.error);
 
   useEffect(() => {
     dispatch(getContacts());
@@ -42,7 +43,7 @@ export default function App() {
   const getVisibleContacts = useMemo(() => {
     const normalizedFilter = filter.toLowerCase();
 
-    let visibleContacts = items.filter((contact: ContactData) =>
+    const visibleContacts = items.filter((contact: ContactData) =>
       contact.name.toLowerCase().includes(normalizedFilter),
     );
     return visibleContacts;
