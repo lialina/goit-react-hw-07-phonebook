@@ -51,6 +51,7 @@ export default function App() {
 
   return (
     <Container>
+      <>
       <h1>Phonebook</h1>
       <ContactForm onSubmit={handleSubmitWithAddContact} />
 
@@ -67,7 +68,8 @@ export default function App() {
           {error}
         </h2>
       )}
-      {!loader && !error && <ContactList contactsData={getVisibleContacts} />}
+        {!loader && !error && <ContactList contactsData={getVisibleContacts} />}
+        </>
     </Container>
   );
 }
