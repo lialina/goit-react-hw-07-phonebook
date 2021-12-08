@@ -7,22 +7,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createContact, getContacts } from './redux/actions';
 import * as phonebookSelectors from './redux/selectors';
 import styles from './App.module.css';
+import type { ContactData } from './types/ContactData';
+import type { AppDispatch } from './redux/types'
+import type { RootState } from './redux/types'
 
 export default function App() {
-  const dispatch = useDispatch();
-  const [filter, setFilter] = useState('');
+  const dispatch = useDispatch<AppDispatch>();
+  const [filter, setFilter] = useState<string>('');
 
-  const items = useSelector(phonebookSelectors.items);
-  const loader = useSelector(phonebookSelectors.loader);
-  const error = useSelector(phonebookSelectors.error);
+  const items = useSelector<RootState, ContactData[]>(phonebookSelectors.items);
+  const loader = useSelector<RootState, boolean>(phonebookSelectors.loader);
+  const error = useSelector<RootState, string>(phonebookSelectors.error);
 
   useEffect(() => {
     dispatch(getContacts());
   }, []);
 
-  const handleSubmitWithAddContact = ({ contact }) => {
+  const handleSubmitWithAddContact = (contact: ContactData) => {
     const presentContact = items.find(
-      presentContact => presentContact.name === contact.name,
+      (presentContact: ContactData) => presentContact.name === contact.name,
     );
     if (presentContact) {
       alert(
@@ -33,14 +36,14 @@ export default function App() {
     }
   };
 
-  const changeFilter = event => {
+  const changeFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFilter(event.currentTarget.value);
   };
 
   const getVisibleContacts = useMemo(() => {
     const normalizedFilter = filter.toLowerCase();
 
-    let visibleContacts = items.filter(contact =>
+    const visibleContacts = items.filter((contact: ContactData) =>
       contact.name.toLowerCase().includes(normalizedFilter),
     );
     return visibleContacts;
@@ -48,6 +51,7 @@ export default function App() {
 
   return (
     <Container>
+      <>
       <h1>Phonebook</h1>
       <ContactForm onSubmit={handleSubmitWithAddContact} />
 
@@ -64,7 +68,8 @@ export default function App() {
           {error}
         </h2>
       )}
-      {!loader && !error && <ContactList contactsData={getVisibleContacts} />}
+        {!loader && !error && <ContactList contactsData={getVisibleContacts} />}
+        </>
     </Container>
   );
 }
