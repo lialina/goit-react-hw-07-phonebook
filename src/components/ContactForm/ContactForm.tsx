@@ -76,8 +76,8 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
         />
       </label>
 
-      <button className={styles?.button} type="submit">
-        Add contact
+      <button className={styles.button} type="submit">
+        Add new contact
       </button>
     </form>
   );
