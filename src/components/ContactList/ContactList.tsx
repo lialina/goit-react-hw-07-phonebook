@@ -14,6 +14,7 @@ interface ContactListProps {
 export default function ContactList({ contactsData }: ContactListProps) {
   const dispatch = useDispatch<AppDispatch>();
   const error = useSelector<RootState, string>(phonebookSelectors.error);
+  const buttonName = 'Delete';
 
   const deleteContactClick = async (id: string) => {
     const deleteAction = await dispatch(deleteContact(id));
@@ -26,16 +27,16 @@ export default function ContactList({ contactsData }: ContactListProps) {
   return (
     <>
       {error && <h2>{error}</h2>}
-      <ul className={styles.list}>
+      <ul className={styles?.list}>
         {contactsData.map(({ id, name, number }) => (
-          <li className={styles.item} key={id}>
-            <p className={styles.name}>{name}</p>
-            <p className={styles.number}>{number}</p>
+          <li className={styles?.item} key={id}>
+            <p className={styles?.name}>{name}</p>
+            <p className={styles?.number}>{number}</p>
             <button
-              className={styles.button}
+              className={styles?.button}
               onClick={() => deleteContactClick(id)}
             >
-              Delete
+              {buttonName}
             </button>
           </li>
         ))}
