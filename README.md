@@ -23,8 +23,7 @@ and discover all the application features.
 ## Perspectives
 
 The application is under development.The possibility of editing already existing
-contacts and other additions is being considered. It is also planned to update
-the design of the application. I would be glad to hear your suggestions and
-recommendations.
+contacts and other additions is being considered. I would be glad to hear your
+suggestions and recommendations.
 
 Enjoy your use!
