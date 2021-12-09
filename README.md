@@ -15,6 +15,7 @@ and discover all the application features.
 - [ReactJS](https://reactjs.org/)
 - [Redux](https://redux.js.org/)
 - [Redux Toolkit](https://redux-toolkit.js.org/)
+- [TypeScript](https://www.typescriptlang.org/)
 - [MockAPI](https://mockapi.io/)
 
 ## Perspectives
