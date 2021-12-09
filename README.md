@@ -15,6 +15,9 @@ and discover all the application features.
 - [ReactJS](https://reactjs.org/)
 - [Redux](https://redux.js.org/)
 - [Redux Toolkit](https://redux-toolkit.js.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Jest](https://jestjs.io/)
+- [Enzyme](https://enzymejs.github.io/enzyme/)
 - [MockAPI](https://mockapi.io/)
 
 ## Perspectives
