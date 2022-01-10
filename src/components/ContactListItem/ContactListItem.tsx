@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './ContactListItem.module.css';
 import { useDispatch } from 'react-redux';
 import { deleteContact, getContacts } from '../../redux/actions';
@@ -22,6 +23,7 @@ export default function ContactListItem({id, name, number}: ContactData ) {
             <p className={styles.number}>{number}</p>
             <button
               className={styles.button}
+              type="button"
               onClick={() => deleteContactClick(id)}
             >
               Delete
