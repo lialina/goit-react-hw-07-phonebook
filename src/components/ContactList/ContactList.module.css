@@ -4,19 +4,3 @@
 
   margin: 0;
 }
-
-.item {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.name,
-.number {
-  margin-right: 10px;
-}
-
-.button {
-  display: inline-block;
-  height: 22px;
-}
